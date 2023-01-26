@@ -37,7 +37,7 @@ namespace BornToMove.DAL
         {
             using (var context = new MoveContext())
             {
-                Move move = context.Moves.Single(move => move.Name == name);
+                Move move = context.Moves.SingleOrDefault(move => move.Name == name);
                 return move;
             }
         }
