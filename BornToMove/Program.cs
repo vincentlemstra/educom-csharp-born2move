@@ -55,9 +55,11 @@ namespace BornToMove
 
         private static bool SubMenu()
         {
+            // start new menu
             Clear();
             WriteLine("Toets [ ] voor gewenste beweging: ");
 
+            // show all moves
             var moves = new MoveBL().GetAllMoves();
             moves.ForEach(move =>
             {
@@ -66,9 +68,9 @@ namespace BornToMove
             WriteLine("\nToets [0] om beweging toe te voegen.");
             Write("\rToets: ");
 
+            // get valid choice
             int maxChoice = new MoveBL().GetMoveCount();
             bool isInt = int.TryParse(ReadLine(), out int choice);
-
             if (isInt)
             {
                 if (choice <= maxChoice)
@@ -80,6 +82,7 @@ namespace BornToMove
                         Write("Naam: ");
                         string name = ReadLine();
 
+                        // check if name is unique
                         var CheckMove = new MoveBL().GetMoveByName(name);
                         if (CheckMove != null)
                         {
@@ -88,12 +91,14 @@ namespace BornToMove
                             return true;
                         }
 
+                        // add description and sweatRate
                         Write("Beschrijving: ");
                         string description = ReadLine();
                         Write("Sweat Rate: ");
                         int sweatRate = Convert.ToInt32(ReadLine());
 
-                        WriteLine("Beweging correct ingevuld? [y]");
+                        // make sure input is correct
+                        WriteLine("Beweging correct ingevuld? [y/n]");
                         if (ReadLine() == "y")
                         {
                             new MoveBL().AddMove(name, description, sweatRate);
@@ -102,6 +107,7 @@ namespace BornToMove
                     }
                     else
                     {
+                        // show chosen move
                         var move = new MoveBL().GetMoveById(choice);
                         WriteLine($"{move.Name} | {move.SweatRate} \n{move.Description}");
                         GetReview();
