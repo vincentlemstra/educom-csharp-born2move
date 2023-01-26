@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BornToMove.DAL
+﻿namespace BornToMove.DAL
 {
     public class MoveCrud
     {
@@ -42,12 +36,12 @@ namespace BornToMove.DAL
             }
         }
 
-        public List<Move> GetAllMoves() 
+        public List<Move> GetAllMoves()
         {
             List<Move> moves = new List<Move>();
             using (var context = new MoveContext())
             {
-                foreach(var move in context.Moves)
+                foreach (var move in context.Moves)
                 {
                     moves.Add(new Move
                     {

@@ -1,13 +1,12 @@
-﻿using static System.Console;
-using BornToMove.BLL;
+﻿using BornToMove.BLL;
+using static System.Console;
 
 namespace BornToMove
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             // todo verplaats menu dingen naar business logic (?)
             // todo verplaats meer checks naar business logic
 
@@ -34,6 +33,7 @@ namespace BornToMove
                     WriteLine($"{move.Name} | {move.SweatRate} \n{move.Description}");
                     GetReview();
                     return false;
+
                 case "2":
                     bool showSubMenu = true;
                     while (showSubMenu)
@@ -41,9 +41,11 @@ namespace BornToMove
                         showSubMenu = SubMenu2();
                     }
                     return false;
+
                 case "x":
                     WriteLine("Tot ziens.");
                     return false;
+
                 default:
                     WriteLine("Geen gelde keuze. Probeer opnieuw...");
                     Thread.Sleep(TimeSpan.FromSeconds(2));
@@ -105,7 +107,12 @@ namespace BornToMove
                         GetReview();
                     }
                 }
-
+                else
+                {
+                    WriteLine("Geen geldige keuze. Probeer opnieuw...");
+                    Thread.Sleep(TimeSpan.FromSeconds(2));
+                    return true;
+                }
             }
             else
             {
