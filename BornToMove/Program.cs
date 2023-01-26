@@ -38,7 +38,7 @@ namespace BornToMove
                     bool showSubMenu = true;
                     while (showSubMenu)
                     {
-                        showSubMenu = SubMenu2();
+                        showSubMenu = SubMenu();
                     }
                     return false;
 
@@ -53,7 +53,7 @@ namespace BornToMove
             }
         }
 
-        private static bool SubMenu2()
+        private static bool SubMenu()
         {
             Clear();
             WriteLine("Toets [ ] voor gewenste beweging: ");
