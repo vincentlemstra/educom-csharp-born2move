@@ -7,8 +7,12 @@ namespace BornToMove
     {
         private static void Main(string[] args)
         {
-            // todo verplaats menu dingen naar business logic (?)
-            // todo verplaats meer checks naar business logic
+            // todo verplaats checks naar business logic
+                // -> validate() maken
+                // Console.Readline() gaat door deze validate
+                    // if empty
+                    // if int / if string
+                    // if < x / if > x
 
             bool showMenu = true;
             while (showMenu)
@@ -31,7 +35,7 @@ namespace BornToMove
                 case "1":
                     var move = new MoveBL().GetRndMove();
                     WriteLine($"{move.Name} | {move.SweatRate} \n{move.Description}");
-                    GetReview();
+                    GetReview(move.MoveId);
                     return false;
 
                 case "2":
@@ -77,6 +81,7 @@ namespace BornToMove
                 {
                     if (choice == 0)
                     {
+                        // start new menu
                         Clear();
                         WriteLine("Beweging toevoegen:");
                         Write("Naam: ");
@@ -109,8 +114,8 @@ namespace BornToMove
                     {
                         // show chosen move
                         var move = new MoveBL().GetMoveById(choice);
-                        WriteLine($"{move.Name} | {move.SweatRate} \n{move.Description}");
-                        GetReview();
+                        WriteLine($"{move.Name} | SweatRate: {move.SweatRate} | \n{move.Description}");
+                        GetReview(choice);
                     }
                 }
                 else
@@ -129,14 +134,19 @@ namespace BornToMove
             return false;
         }
 
-        private static void GetReview()
+        private static void GetReview(int moveId)
         {
+            // wait untill move is done
             WriteLine("\nDruk op een willekeurige toets wanneer beweging voltooid is...");
             ReadKey(true);
+
+            // add review to db
             Write("Beoordeling [1-5]: ");
-            ReadLine();
+            int rating = Convert.ToInt32(ReadLine());
             Write("Intensiteit [1-5]: ");
-            ReadLine();
+            int intensity = Convert.ToInt32(ReadLine());
+            new MoveBL().AddReview(moveId, rating ,intensity);
+            
             WriteLine("Goed bezig! Fijne dag verder.");
         }
     }

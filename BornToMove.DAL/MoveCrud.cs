@@ -1,4 +1,6 @@
-﻿namespace BornToMove.DAL
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace BornToMove.DAL
 {
     public class MoveCrud
     {
@@ -18,11 +20,43 @@
             }
         }
 
-        public Move GetMoveById(int id)
+        public void AddReview(int moveId, int rating, int intensity)
         {
             using (var context = new MoveContext())
             {
-                Move move = context.Moves.Single(move => move.MoveId == id);
+                Move move = context.Moves.First(move => move.MoveId == moveId);
+                var moveRating = new MoveRating
+                {
+                    Move = move,
+                    Rating = rating,
+                    Intensity = intensity
+                };
+                context.MoveRatings.Add(moveRating);
+                context.SaveChanges();
+            }
+        }
+
+        public Move GetMoveAndRatingById(int id)
+        {
+            throw new NotImplementedException();
+
+            // Hoe krijg ik nu de Move met Rating + intensity erbij (?)
+            // Wat ik heb geprobeerd:
+                // Inlude functie: (context.Moves.Include(m => m.Reviews))
+                // Inlude functie met List als return: (context.Moves.Include(m => m.Reviews).ToList())
+                // Group functie: (context.Moves.GroupBy(m => m.MoveId))
+                // LINQ Tabellen joinen: (.from.in.join.where.select)
+
+            // Wat ik nog niet geprobeerd heb:
+                // Lazy Loading: Proxies of de ILazyLoader gebruiken
+                // Nog niet geprobeerd omdat ik idee heb dat dit niet binnen de opdracht valt
+        }
+
+        public Move GetMoveById(int moveId)
+        {
+            using (var context = new MoveContext())
+            {
+                Move move = context.Moves.Single(move => move.MoveId == moveId);
                 return move;
             }
         }

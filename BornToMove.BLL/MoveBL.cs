@@ -9,6 +9,11 @@ namespace BornToMove.BLL
             new MoveCrud().AddMove(name, description, sweatRate);
         }
 
+        public void AddReview(int moveId, int rating, int intensity)
+        {
+            new MoveCrud().AddReview(moveId, rating, intensity);
+        }
+
         public Move GetMoveById(int id)
         {
             return new MoveCrud().GetMoveById(id);

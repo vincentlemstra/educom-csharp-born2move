@@ -3,6 +3,7 @@ using BornToMove.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BornToMove.DAL.Migrations
 {
     [DbContext(typeof(MoveContext))]
-    partial class MoveContextModelSnapshot : ModelSnapshot
+    [Migration("20230126084244_ChangeVoteToIntensity")]
+    partial class ChangeVoteToIntensity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,31 +57,31 @@ namespace BornToMove.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MoveRatingId"));
 
-                    b.Property<double>("Intensity")
-                        .HasColumnType("float");
-
-                    b.Property<int>("MoveId1")
+                    b.Property<int>("MoveId")
                         .HasColumnType("int");
 
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
+                    b.Property<double>("Vote")
+                        .HasColumnType("float");
+
                     b.HasKey("MoveRatingId");
 
-                    b.HasIndex("MoveId1");
+                    b.HasIndex("MoveId");
 
                     b.ToTable("MoveRatings");
                 });
 
             modelBuilder.Entity("BornToMove.DAL.MoveRating", b =>
                 {
-                    b.HasOne("BornToMove.DAL.Move", "MoveId")
+                    b.HasOne("BornToMove.DAL.Move", "Move")
                         .WithMany("Ratings")
-                        .HasForeignKey("MoveId1")
+                        .HasForeignKey("MoveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("MoveId");
+                    b.Navigation("Move");
                 });
 
             modelBuilder.Entity("BornToMove.DAL.Move", b =>

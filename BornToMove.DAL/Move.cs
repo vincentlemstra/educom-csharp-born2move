@@ -11,5 +11,6 @@ namespace BornToMove.DAL
 
         public string Description { get; set; }
         public int SweatRate { get; set; }
+        public ICollection<MoveRating> Ratings { get; set;}
     }
 }
