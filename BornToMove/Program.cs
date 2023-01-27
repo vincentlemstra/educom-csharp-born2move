@@ -8,7 +8,7 @@ namespace BornToMove
         private static void Main(string[] args)
         {
             // todo verplaats checks naar business logic
-                // -> validate() maken
+            // -> validate() maken
                 // Console.Readline() gaat door deze validate
                     // if empty
                     // if int / if string
@@ -33,9 +33,14 @@ namespace BornToMove
             switch (ReadLine())
             {
                 case "1":
+                    Clear();
                     var move = new MoveBL().GetRndMove();
-                    WriteLine($"{move.Name} | {move.SweatRate} \n{move.Description}");
-                    GetReview(move.MoveId);
+                    WriteLine($"{move.Move.Name} " +
+                        $"| Sweat Rate: {move.Move.SweatRate} " +
+                        $"| Beoordeling: {move.Rating:n1} " +
+                        $"| Intensiteit: {move.Intensity:n1} " +
+                        $"\n{move.Move.Description}");
+                    GetReview(move.Move.MoveId);
                     return false;
 
                 case "2":
@@ -113,8 +118,13 @@ namespace BornToMove
                     else
                     {
                         // show chosen move
+                        Clear();
                         var move = new MoveBL().GetMoveById(choice);
-                        WriteLine($"{move.Name} | SweatRate: {move.SweatRate} | \n{move.Description}");
+                        WriteLine($"{move.Move.Name} " +
+                            $"| Sweat Rate: {move.Move.SweatRate} " +
+                            $"| Beoordeling: {move.Rating:n1} " +
+                            $"| Intensiteit: {move.Intensity:n1} " +
+                            $"\n{move.Move.Description}");
                         GetReview(choice);
                     }
                 }
@@ -145,8 +155,8 @@ namespace BornToMove
             int rating = Convert.ToInt32(ReadLine());
             Write("Intensiteit [1-5]: ");
             int intensity = Convert.ToInt32(ReadLine());
-            new MoveBL().AddReview(moveId, rating ,intensity);
-            
+            new MoveBL().AddReview(moveId, rating, intensity);
+
             WriteLine("Goed bezig! Fijne dag verder.");
         }
     }

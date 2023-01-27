@@ -36,28 +36,16 @@ namespace BornToMove.DAL
             }
         }
 
-        public Move GetMoveAndRatingById(int id)
-        {
-            throw new NotImplementedException();
-
-            // Hoe krijg ik nu de Move met Rating + intensity erbij (?)
-            // Wat ik heb geprobeerd:
-                // Inlude functie: (context.Moves.Include(m => m.Reviews))
-                // Inlude functie met List als return: (context.Moves.Include(m => m.Reviews).ToList())
-                // Group functie: (context.Moves.GroupBy(m => m.MoveId))
-                // LINQ Tabellen joinen: (.from.in.join.where.select)
-
-            // Wat ik nog niet geprobeerd heb:
-                // Lazy Loading: Proxies of de ILazyLoader gebruiken
-                // Nog niet geprobeerd omdat ik idee heb dat dit niet binnen de opdracht valt
-        }
-
-        public Move GetMoveById(int moveId)
+        public MoveRating GetMoveById(int id)
         {
             using (var context = new MoveContext())
             {
-                Move move = context.Moves.Single(move => move.MoveId == moveId);
-                return move;
+                return context.Moves.Select(move => new MoveRating()
+                {
+                    Move = move,
+                    Rating = move.Ratings.Average(r => r.Rating),
+                    Intensity = move.Ratings.Average(i => i.Intensity)
+                }).First(m => m.Move.MoveId == id);
             }
         }
 

@@ -14,7 +14,7 @@ namespace BornToMove.BLL
             new MoveCrud().AddReview(moveId, rating, intensity);
         }
 
-        public Move GetMoveById(int id)
+        public MoveRating GetMoveById(int id)
         {
             return new MoveCrud().GetMoveById(id);
         }
@@ -34,7 +34,7 @@ namespace BornToMove.BLL
             return new MoveCrud().GetAllMoves().Count;
         }
 
-        public Move GetRndMove()
+        public MoveRating GetRndMove()
         {
             Random rnd = new Random();
             int max = new MoveCrud().GetAllMoves().Count;
