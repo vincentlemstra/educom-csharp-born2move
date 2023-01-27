@@ -70,9 +70,11 @@ namespace BornToMove
 
             // show all moves
             var moves = new MoveBL().GetAllMoves();
+            int i = 1;
             moves.ForEach(move =>
             {
-                WriteLine("Toets [" + move.MoveId + "] " + move.Name + " | sweat rate: " + move.SweatRate);
+                WriteLine($"Toets [{i}] {move.Name} | sweat rate: {move.SweatRate} ");
+                i++;
             });
             WriteLine("\nToets [0] om beweging toe te voegen.");
             Write("\rToets: ");
