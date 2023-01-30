@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BornToMove.DAL
+﻿namespace BornToMove.DAL
 {
     public class MoveRating
     {

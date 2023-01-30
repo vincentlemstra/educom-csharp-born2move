@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace BornToMove.DAL
+﻿namespace BornToMove.DAL
 {
     public class MoveCrud
     {
@@ -53,8 +51,7 @@ namespace BornToMove.DAL
         {
             using (var context = new MoveContext())
             {
-                Move move = context.Moves.SingleOrDefault(move => move.Name == name);
-                return move;
+                return context.Moves.SingleOrDefault(move => move.Name == name);
             }
         }
 
@@ -73,6 +70,15 @@ namespace BornToMove.DAL
                         SweatRate = move.SweatRate
                     });
                 }
+                return moves;
+            }
+        }
+
+        public List<MoveRating> GetAllMoves2()
+        {
+            List<MoveRating> moves = new List<MoveRating>();
+            using (var context = new MoveContext())
+            {
                 return moves;
             }
         }

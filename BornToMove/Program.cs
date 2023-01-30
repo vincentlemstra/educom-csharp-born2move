@@ -9,10 +9,11 @@ namespace BornToMove
         {
             // todo verplaats checks naar business logic
             // -> validate() maken
-                // Console.Readline() gaat door deze validate
-                    // if empty
-                    // if int / if string
-                    // if < x / if > x
+            // Console.Readline() gaat door deze validate
+            // if empty
+            // if int / if string
+            // if < x / if > x
+            // todo rating + intensity toevoegen aan GetAllMoves()
 
             bool showMenu = true;
             while (showMenu)
