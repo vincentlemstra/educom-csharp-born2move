@@ -8,20 +8,20 @@ namespace BornToMove.OrganizerTest
         [Test]
         public void TestSort_ArgumentNull()
         {
-            // 1
+            // Arrange
             var shs = new ShiftHighestSort<int>();
             var comparer = Comparer<int>.Default;
 
-            // 2 + 3
+            // Act + Assert
             Assert.Throws<ArgumentNullException>(
                 () => shs.Sort(null, comparer)
             );
         }
 
         [Test]
-        public void TestSort_Empty()
+        public void TestSort_EmptyArray()
         {
-            // Arrage
+            // Arrange
             var input = new List<int> { };
             var comparer = Comparer<int>.Default;
             var shs = new ShiftHighestSort<int>();
